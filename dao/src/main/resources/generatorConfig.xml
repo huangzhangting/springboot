@@ -1,0 +1,54 @@
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<!-- mvn mybatis-generator:generate -->
+<generatorConfiguration>
+
+    <properties resource="generator.properties"/>
+
+    <classPathEntry location="${class_path}"/>
+
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+        <property name="javaFileEncoding" value="UTF-8"/>
+
+        <!--<plugin type="org.mybatis.generator.plugins.ToStringPlugin" />-->
+        <plugin type="com.mybatis.generator.plugins.MyPlugin">
+            <property name="useLombok" value="true"/>
+        </plugin>
+
+        <commentGenerator >
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="${jdbc_url}"
+                        userId="${jdbc_user_name}"
+                        password="${jdbc_password}">
+        </jdbcConnection>
+
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="nom.learning.springboot.dao.model" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="mybatis.mapper"  targetProject="src/main/resources">
+            <property name="enableSubPackages" value="false" />
+        </sqlMapGenerator>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="nom.learning.springboot.dao.mapper"  targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <table tableName="user_extend" domainObjectName="UserExtendDO"
+               enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+        </table>
+
+
+    </context>
+</generatorConfiguration>

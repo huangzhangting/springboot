@@ -5,16 +5,16 @@
 	default-lazy-init="false">
 
 	<bean id="simpleProducer" class="nom.learning.springboot.service.mq.rocketmq.SimpleProducer">
-		<!-- 多个生产者 application 不能一样，会报错 -->
 		<property name="application" value="${rocketmq.application}" />
 		<property name="nameServerAddress" value="${rocketmq.nameServerAddress}" />
-		<property name="topic" value="hzt_test_topic" />
+		<property name="topic" value="SELF_TEST_TOPIC" />
 	</bean>
 
 	<bean id="simplePushConsumer" class="nom.learning.springboot.service.mq.rocketmq.SimplePushConsumer" >
 		<property name="application" value="${rocketmq.application}" />
 		<property name="nameServerAddress" value="${rocketmq.nameServerAddress}" />
-		<property name="topic" value="hzt_test_topic" />
+		<property name="topic" value="SELF_TEST_TOPIC" />
+		<!--<property name="broadcasting" value="true" />-->
 		<property name="messageListener">
 		   <bean class="nom.learning.springboot.service.mq.ConsumerTest"/>
 		</property>

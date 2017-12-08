@@ -105,9 +105,11 @@ public class SimpleProducer implements InitializingBean, DisposableBean {
         Assert.hasText(application);
         //Assert.hasText(topic);
 
-        producer = new DefaultMQProducer(this.application);
-        producer.setNamesrvAddr(this.nameServerAddress);
+        producer = new DefaultMQProducer(application.toUpperCase() + "_" + topic);
+        producer.setNamesrvAddr(nameServerAddress);
         producer.setVipChannelEnabled(false);
         producer.start();
+
+        log.info("mq producer start.");
     }
 }

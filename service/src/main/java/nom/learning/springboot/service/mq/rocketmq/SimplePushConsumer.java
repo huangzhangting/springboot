@@ -65,6 +65,7 @@ public class SimplePushConsumer implements InitializingBean, DisposableBean {
         }
         pushConsumer.start();
 
+        log.info("mq consumer start.");
     }
 
     @Override

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class SchedulerTask {
 
-    @Scheduled(cron="*/6 * * * * ?")
+//    @Scheduled(cron="*/6 * * * * ?")
     private void process(){
         log.info("process task");
     }

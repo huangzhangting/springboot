@@ -53,4 +53,11 @@ public class TestController {
         return true;
     }
 
+
+    @RequestMapping("mq")
+    public Object testMq(){
+        userService.register();
+        return true;
+    }
+
 }

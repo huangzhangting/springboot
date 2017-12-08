@@ -14,8 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  * Created by huangzhangting on 2017/12/5.
  */
 @Configuration
-//导入xml配置文件
-@ImportResource(locations = {"classpath:spring-beans.xml"})
+
 public class WebConfiguration extends WebMvcConfigurerAdapter {
     @Bean
     public RemoteIpFilter remoteIpFilter() {

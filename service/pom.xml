@@ -17,6 +17,11 @@
             <artifactId>dao</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.alibaba.rocketmq</groupId>
+            <artifactId>rocketmq-client</artifactId>
+        </dependency>
+
     </dependencies>
 
 

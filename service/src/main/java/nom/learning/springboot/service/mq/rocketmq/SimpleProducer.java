@@ -79,7 +79,8 @@ public class SimpleProducer implements InitializingBean, DisposableBean {
         Assert.notNull(message.getBody());
         Assert.isTrue(timeoutInMilliSeconds > 0, "超时时间必须大于0");
         try {
-            Message msg = new Message(topic, message.getTags(), message.getKeys(), message.getBody().getBytes());
+            Message msg = new Message(topic, message.getTags(), message.getKeys(),
+                    message.getBody().getBytes());
             return producer.send(msg, timeoutInMilliSeconds);
         } catch (Exception e) {
             throw new MQException(e);

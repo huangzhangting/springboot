@@ -1,6 +1,5 @@
 package nom.learning.springboot.service.mq;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import com.alibaba.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import com.alibaba.rocketmq.client.consumer.listener.MessageListenerConcurrently;
@@ -17,7 +16,11 @@ public class ConsumerTest implements MessageListenerConcurrently {
 
     @Override
     public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> messages, ConsumeConcurrentlyContext context) {
-        log.info("consume messages: {}", JSON.toJSONString(messages));
+        for(MessageExt ext : messages){
+            String msg = new String(ext.getBody());
+            log.info("consume message: {}", msg);
+        }
+        //TODO 遗留问题，消费后消息始终存在，每次启动都会消费到之前的消息，待跟进
         return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
     }
 

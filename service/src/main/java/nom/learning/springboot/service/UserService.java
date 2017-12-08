@@ -62,6 +62,8 @@ public class UserService {
         UserExtendDO user = new UserExtendDO();
         user.setMobile("test123");
         user.setUserId(123);
+        user.setReferrerName("黄章挺");
+
         StringMessage message = new StringMessage(JSON.toJSONString(user));
         try {
             log.info("register mq: {}", JSON.toJSONString(message));

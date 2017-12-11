@@ -24,7 +24,7 @@ import java.util.List;
 public class UserService {
     @Resource
     UserExtendDOMapper userExtendDOMapper;
-    @Resource
+    @Resource(name = "userRegisterProducer")
     SimpleProducer simpleProducer;
 
 

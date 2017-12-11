@@ -8,6 +8,9 @@ import org.springframework.context.annotation.ImportResource;
  */
 @Configuration
 //导入xml配置文件
-@ImportResource(locations = {"classpath:spring-beans.xml", "classpath:mq-config.xml"})
+@ImportResource(locations = {
+        "classpath:spring-beans.xml"
+//        , "classpath:mq-config.xml"
+})
 public class ServiceConfig {
 }

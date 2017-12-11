@@ -1,18 +1,15 @@
 package nom.learning.springboot.service.mq;
 
+import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
-import nom.learning.springboot.service.mq.rocketmq.SimpleProducer;
-import nom.learning.springboot.service.mq.rocketmq.SimplePushConsumer;
-import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
-import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
-import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
-import org.apache.rocketmq.common.message.MessageExt;
+import nom.learning.springboot.dao.model.UserExtendDO;
+import nom.learning.springboot.service.mq.rocketmqclient.SimpleProducer;
+import nom.learning.springboot.service.mq.rocketmqclient.SimplePushConsumer;
+import nom.learning.springboot.service.mq.rocketmqimpl.AbstractMessageListenerConcurrently;
+import nom.learning.springboot.service.mq.rocketmqimpl.ProcessMessageException;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 /**
  * Created by huangzhangting on 2017/12/11.
@@ -38,18 +35,14 @@ public class UserRegisterMQ {
     public SimplePushConsumer userRegisterConsumer(){
         SimplePushConsumer consumer = new SimplePushConsumer();
         consumer.setTopic(TOPIC);
-        consumer.setMessageListener(new MessageListenerConcurrently() {
+        consumer.setMessageListener(new AbstractMessageListenerConcurrently<UserExtendDO>() {
             @Override
-            public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> messages, ConsumeConcurrentlyContext context) {
-                //一次只会消费一条消息
-                for(MessageExt ext : messages){
-                    String msg = new String(ext.getBody());
-                    log.info("consume message: {}", msg);
+            protected void processMessage(UserExtendDO message) throws ProcessMessageException {
+                if(message == null){
+                    throw new ProcessMessageException("message is null.");
                 }
-                //TODO 遗留问题，消费后消息始终存在，每次启动都会消费到之前的消息，待跟进：mq版本问题
-                //mq服务使用的是Apache的最新代码编译的，client使用的是Alibaba的，所以ack一直没有成功，client版本调整成Apache的就没有问题了
-                log.info("consume success.");
-                return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
+                log.info("process message success. message: {}", JSON.toJSONString(message));
+//                throw new ProcessMessageException("test process exception.");
             }
         });
         return consumer;

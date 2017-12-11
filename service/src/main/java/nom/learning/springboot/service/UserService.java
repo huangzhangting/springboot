@@ -1,13 +1,11 @@
 package nom.learning.springboot.service;
 
-import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import nom.learning.springboot.dao.mapper.UserExtendDOMapper;
 import nom.learning.springboot.dao.model.UserExtendDO;
 import nom.learning.springboot.service.bo.User;
-import nom.learning.springboot.service.mq.rocketmq.MQException;
-import nom.learning.springboot.service.mq.rocketmq.SimpleProducer;
-import nom.learning.springboot.service.mq.rocketmq.StringMessage;
+import nom.learning.springboot.service.mq.rocketmqclient.SimpleProducer;
+import nom.learning.springboot.service.mq.rocketmqimpl.ProducerUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -24,6 +22,7 @@ import java.util.List;
 public class UserService {
     @Resource
     UserExtendDOMapper userExtendDOMapper;
+
     @Resource(name = "userRegisterProducer")
     SimpleProducer simpleProducer;
 
@@ -64,13 +63,7 @@ public class UserService {
         user.setUserId(123);
         user.setReferrerName("黄章挺");
 
-        StringMessage message = new StringMessage(JSON.toJSONString(user));
-        try {
-            log.info("register mq: {}", JSON.toJSONString(message));
-            simpleProducer.sendMessage(message);
-        } catch (MQException e) {
-            log.error("", e);
-        }
+        ProducerUtil.sendMessage(simpleProducer, user);
     }
 
 }

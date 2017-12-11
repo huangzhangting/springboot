@@ -1,4 +1,4 @@
-package nom.learning.springboot.service.mq.rocketmq;
+package nom.learning.springboot.service.mq.rocketmqclient;
 
 
 import lombok.Setter;

@@ -63,11 +63,11 @@
                 <version>1.4.0</version>
             </dependency>
 
-            <!-- https://mvnrepository.com/artifact/com.alibaba.rocketmq/rocketmq-client -->
+            <!-- https://mvnrepository.com/artifact/org.apache.rocketmq/rocketmq-client -->
             <dependency>
-                <groupId>com.alibaba.rocketmq</groupId>
+                <groupId>org.apache.rocketmq</groupId>
                 <artifactId>rocketmq-client</artifactId>
-                <version>3.6.2.Final</version>
+                <version>4.1.0-incubating</version>
             </dependency>
 
 

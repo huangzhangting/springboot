@@ -1,10 +1,10 @@
 package nom.learning.springboot.service.mq.rocketmq;
 
-import com.alibaba.rocketmq.client.producer.DefaultMQProducer;
-import com.alibaba.rocketmq.client.producer.SendResult;
-import com.alibaba.rocketmq.common.message.Message;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.rocketmq.client.producer.DefaultMQProducer;
+import org.apache.rocketmq.client.producer.SendResult;
+import org.apache.rocketmq.common.message.Message;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
@@ -106,7 +106,7 @@ public class SimpleProducer implements InitializingBean, DisposableBean {
         Assert.hasText(application);
         //Assert.hasText(topic);
 
-        producer = new DefaultMQProducer(application.toUpperCase() + "_" + topic);
+        producer = new DefaultMQProducer(application);
         producer.setNamesrvAddr(nameServerAddress);
         producer.setVipChannelEnabled(false);
         producer.start();

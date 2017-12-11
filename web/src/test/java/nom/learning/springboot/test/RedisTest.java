@@ -19,9 +19,6 @@ public class RedisTest extends BaseTest {
     @Resource
     StringRedisTemplate stringRedisTemplate;
 
-    @Resource
-    RedisUtil redisUtil;
-
 
     @Test
     public void test(){
@@ -52,13 +49,13 @@ public class RedisTest extends BaseTest {
         user.setMobile("123123");
 
         String key = keyPre + "user";
-        redisUtil.setJson(key, user, 600);
+        RedisUtil.setJson(key, user, 600);
     }
 
     @Test
     public void test_getjson(){
         String key = keyPre + "user";
-        UserExtendDO user = redisUtil.getFromJson(key, UserExtendDO.class);
+        UserExtendDO user = RedisUtil.getFromJson(key, UserExtendDO.class);
         System.out.println(user);
     }
 
